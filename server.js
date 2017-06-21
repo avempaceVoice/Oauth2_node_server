@@ -66,6 +66,10 @@ router.get('/login', function(req, res, next) {
 
     res.render('login')
 })
+router.get('/addUser', function(req, res, next) {
+
+    res.render('user')
+})
 router.get('/error', function(req, res, next) {
 
     res.render('error')
@@ -88,8 +92,12 @@ router.post('/addNewUser', function(req, res, next) {
     userController.adduser(user, function(userAdded) {
 
         /* models.client.create({ name: 'alexa', idClient: 'alexa_id', secret: "alexa", userId: userAdded.id });*/
+        if (userAdded) {
+            res.redirect('login')
+        } else {
+            res.redirect('addUser')
+        }
 
-        res.send({ status: 'ok' })
     })
 
 
